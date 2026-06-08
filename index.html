@@ -98,11 +98,49 @@ z-index:99999;
 opacity:1;
 visibility:visible;
 }
+
+  #cartCount{
+position:absolute;
+top:8px;
+right:8px;
+background:red;
+color:white;
+font-size:12px;
+width:20px;
+height:20px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+}
+
+  .fab{
+position:fixed;
+bottom:20px;
+left:20px;
+width:60px;
+height:60px;
+background:#111;
+color:white;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+cursor:pointer;
+box-shadow:0 10px 25px rgba(0,0,0,.3);
+z-index:99999;
+position:fixed;
+overflow:visible;
+}
 </style>
 </head>
 <body>
 
-<div class="fab" onclick="toggleCart()">🛒</div>
+<div class="fab" onclick="toggleCart()">
+🛒 <span id="cartCount">0</span>
+</div>
 
 <div class="overlay" id="overlay" onclick="toggleCart()"></div>
 
@@ -170,7 +208,9 @@ total+=x.price*x.qty;
 return `${x.name} ${x.size} x${x.qty}<br>`
 }).join("<hr>");
 document.getElementById("total").innerText="Total:"+total+"€"
+document.getElementById("cartCount").innerText = cart.reduce((a,b)=>a + b.qty, 0);
 }
+  
 function enviarWhatsApp(){
 let n=document.getElementById("nombreCliente").value;
 let txt="🛒 NUEVO PEDIDO\nNombre:"+n+"\n\n";
