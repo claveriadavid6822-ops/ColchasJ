@@ -1,337 +1,163 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Colchas Jimenez</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
-body{background:#050505;color:white;}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+body{background:#f5f2eb;color:#222}
 .hero{
-padding:80px 20px;
-text-align:center;
-background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.9)),
-url('Portada colchas.png');
-background-size:cover;
-background-position:center;
+height:70vh;color:white;display:flex;align-items:center;justify-content:center;
+text-align:center;padding:20px;
+background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.6)),url('Portada colchas.png');background-size:cover;background-position:center top;
 }
-
-h1{font-size:3rem;}
-.gold{color:#d4af37;}
-
-.section{padding:60px 8%;}
-
+.hero h1{font-size:4rem}
+.hero p{margin-top:10px}
+.gold{color:#d8a84b}
 .products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
+display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;padding:60px;
 }
-
 .card{
-background:#111;
-border:1px solid #222;
-border-radius:20px;
-overflow:hidden;
+background:white;border-radius:25px;overflow:hidden;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
 transition:.3s;
-padding-bottom:20px;
 }
-
-.card:hover{transform:translateY(-5px);border-color:#d4af37;}
-
-.card img{width:100%;height:220px;object-fit:cover;}
-
-.card h3{margin:10px 0;}
-
-.price{color:#d4af37;font-size:20px;font-weight:bold;}
-
-.controls{
-display:flex;
-gap:10px;
-justify-content:center;
-margin:10px 0;
+.card:hover{transform:translateY(-8px)}
+.card img{width:100%;height:340px;object-fit:cover}
+.info{padding:20px}
+.price{font-size:24px;color:#d8a84b;font-weight:bold}
+.cart{
+position:fixed;right:20px;top:20px;width:330px;z-index:999;
+background:white;border-radius:20px;padding:20px;
+box-shadow:0 10px 35px rgba(0,0,0,.2)
 }
-
-input[type=number]{
-width:60px;
-padding:5px;
-border-radius:8px;
-border:none;
-text-align:center;
-}
-
 button{
-background:linear-gradient(135deg,#d4af37,#f5d77a);
-border:none;
-padding:10px 15px;
-border-radius:10px;
-cursor:pointer;
-font-weight:bold;
+border:none;background:#111;color:white;padding:12px;
+border-radius:12px;cursor:pointer;width:100%
 }
+select,input{width:100%;padding:10px;border-radius:10px;margin:10px 0}
+.qty{display:flex;gap:10px;align-items:center;justify-content:center;margin:10px 0}
+.qty button{width:40px}
+.total{font-weight:bold;margin-top:15px;color:#d8a84b}
 
+@media(max-width:768px){
 .cart{
 position:fixed;
-right:20px;
-top:20px;
-width:320px;
-background:#111;
-border:1px solid #333;
-padding:15px;
-border-radius:15px;
-max-height:90vh;
+bottom:0;
+top:auto;
+left:0;
+right:0;
+width:100%;
+margin:0;
+border-radius:20px 20px 0 0;
+max-height:60px;
+overflow:hidden;
+transition:.4s;
+}
+.cart.open{
+max-height:75vh;
 overflow:auto;
 }
-
-.cart h3{color:#d4af37;}
-
-.cart-item{
-font-size:14px;
-margin:10px 0;
-border-bottom:1px solid #222;
-padding-bottom:5px;
-}
-
-.total{
-margin-top:10px;
+.cartToggle{
+display:block;
 font-weight:bold;
-color:#d4af37;
+text-align:center;
+padding:10px;
+cursor:pointer;
+}
+.hero{
+height:55vh;
+background-position:center center;
+}
 }
 
-.reserve-btn{
-width:100%;
-margin-top:10px;
+@media(max-width:768px){
+.cart{position:relative;width:90%;margin:20px auto}
+.hero h1{font-size:2.5rem}
+.products{padding:20px}
 }
-  @media (max-width:768px){
-.cart{
-  max-height: 60px;
-  overflow:hidden;
-}
-.cart:hover{
-  max-height: 45vh;
-}
-}
-  .qty-control{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  justify-content:center;
-}
-
-.qty-control button{
-  width:35px;
-  height:35px;
-  border-radius:8px;
-  border:none;
-  background:#d4af37;
-  font-size:18px;
-  font-weight:bold;
-}
-
-.qty-control span{
-  min-width:25px;
-  text-align:center;
-  font-weight:bold;
-}
-
 </style>
 </head>
-
 <body>
 
-<div class="cart">
-<h3>🛒 Carrito</h3>
-  
-  <div style="padding:10px;">
-  <h3>Datos del cliente</h3>
-  <input type="text" id="nombreCliente" placeholder="Tu nombre" 
-  style="width:100%;padding:8px;margin-top:5px;border-radius:8px;border:none;">
-</div>
-  
+<div class="cart" id="cartBox"><div class="cartToggle" onclick="toggleCart()">🛒 Abrir carrito</div>
+<h2>🛒 Carrito</h2>
+<input id="nombreCliente" placeholder="Tu nombre">
 <div id="cart"></div>
-<div class="total" id="total">Total: 0€</div>
-
-<button class="reserve-btn" onclick="enviarWhatsApp()">
-Reservar todo
-</button>
+<div class="total" id="total">Total:0€</div><br>
+<button onclick="enviarWhatsApp()">Reservar todo</button>
 </div>
 
 <section class="hero">
+<div>
 <h1>Colchas <span class="gold">Jimenez</span></h1>
-<p>Compra y reserva directamente por WhatsApp</p>
+<p>Diseño premium · Reserva por WhatsApp</p>
+</div>
 </section>
 
-<section class="section">
-
-<div class="products">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
-<h3>Colcha M1</h3>
-<div class="price">10€</div>
-  
-  <select id="size1" style="width:100%;padding:8px;margin:10px 0;border-radius:8px;">
-  <option value="1.50 (250x260)">1.50 (250x260)</option>
-  <option value="1.05 (200x260)">1.05 (200x260)</option>
-</select>
-  
-<div class="controls">
-<div class="qty-control">
-  <button onclick="changeQty('q1', -1)">-</button>
-  <span id="q1">1</span>
-  <button onclick="changeQty('q1', 1)">+</button>
-</div>
-<button onclick="add('Colcha M1',10,'q1','size1')">Añadir</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
-<h3>Colcha M2</h3>
-<div class="price">10€</div>
-  
-  <select id="size2" style="width:100%;padding:8px;margin:10px 0;border-radius:8px;">
-  <option value="1.50 (250x260)">1.50 (250x260)</option>
-  <option value="1.05 (200x260)">1.05 (200x260)</option>
-</select>
-  
-<div class="controls">
-<div class="qty-control">
-  <button onclick="changeQty('q2', -1)">-</button>
-  <span id="q2">1</span>
-  <button onclick="changeQty('q2', 1)">+</button>
-</div>
-<button onclick="add('Colcha M2',10,'q2','size2')">Añadir</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
-<h3>Colcha M3</h3>
-<div class="price">10€</div>
-  
-  <select id="size3" style="width:100%;padding:8px;margin:10px 0;border-radius:8px;">
-  <option value="1.50 (250x260)">1.50 (250x260)</option>
-  <option value="1.05 (200x260)">1.05 (200x260)</option>
-</select>
-  
-<div class="controls">
-<div class="qty-control">
-  <button onclick="changeQty('q3', -1)">-</button>
-  <span id="q3">1</span>
-  <button onclick="changeQty('q3', 1)">+</button>
-</div>
-<button onclick="add('Colcha M3',10,'q3','size3')">Añadir</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
-<h3>Colcha M4</h3>
-<div class="price">10€</div>
-  
-  <select id="size4" style="width:100%;padding:8px;margin:10px 0;border-radius:8px;">
-  <option value="1.50 (250x260)">1.50 (250x260)</option>
-  <option value="1.05 (200x260)">1.05 (200x260)</option>
-</select>
-  
-<div class="controls">
-<div class="qty-control">
-  <button onclick="changeQty('q4', -1)">-</button>
-  <span id="q4">1</span>
-  <button onclick="changeQty('q4', 1)">+</button>
-</div>
-<button onclick="add('Colcha M4',10,'q4','size4')">Añadir</button>
-</div>
-</div>
-
-</div>
-
-</section>
+<div class="products" id="products"></div>
 
 <script>
+const productos=[
+{name:"Colcha M1",price:10,img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85"},
+{name:"Colcha M2",price:10,img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85"},
+{name:"Colcha M3",price:10,img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85"},
+{name:"Colcha M4",price:10,img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85"},
+{name:"Colcha Luxury",price:18,img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85"},
+{name:"Colcha Premium",price:20,img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85"},
+];
 
-let cart = [];
+let cart=[];
 
-function add(name, price, qtyId, sizeId){
+document.getElementById("products").innerHTML=productos.map((p,i)=>`
+<div class=card>
+<img src="${p.img}">
+<div class=info>
+<h3>${p.name}</h3>
+<div class=price>${p.price}€</div>
+<select id=s${i}>
+<option>1.50 (250x260)</option>
+<option>1.05 (200x260)</option>
+</select>
+<div class=qty>
+<button onclick="q${i}.innerText=Math.max(1,+q${i}.innerText-1)">-</button>
+<span id=q${i}>1</span>
+<button onclick="q${i}.innerText=+q${i}.innerText+1">+</button>
+</div>
+<button onclick="add('${p.name}',${p.price},q${i}.innerText,s${i}.value)">Añadir</button>
+</div></div>`).join('');
 
-let qty = parseInt(document.getElementById(qtyId).innerText);
-let size = document.getElementById(sizeId).value;
-
-let existing = cart.find(p => p.name === name && p.size === size);
-
-if(existing){
-existing.qty += qty;
-} else {
-cart.push({name, price, qty, size});
+function add(name,price,qty,size){
+cart.push({name,price,qty:+qty,size});
+render()
 }
-
-render();
-}
-
 function render(){
-
-let html = "";
-let total = 0;
-
-cart.forEach(item=>{
-html += `<div class="cart-item">
-${item.name}, ${item.size} x${item.qty} - ${item.price*item.qty}€
-</div>`;
-total += item.price * item.qty;
-});
-
-document.getElementById("cart").innerHTML = html;
-document.getElementById("total").innerHTML = "Total: " + total + "€";
-
-updateCartCount();
+let total=0;
+cart.innerHTML="";
+document.getElementById("cart").innerHTML=cart.map(x=>{
+total+=x.price*x.qty;
+return `${x.name} (${x.size}) x${x.qty}<br>`
+}).join("<hr>");
+document.getElementById("total").innerText="Total:"+total+"€"
 }
-
 function enviarWhatsApp(){
-
-if(cart.length === 0){
-alert("Carrito vacío");
-return;
+let n=document.getElementById("nombreCliente").value;
+let txt="🛒 NUEVO PEDIDO\nNombre:"+n+"\n\n";
+cart.forEach(x=>txt+=`${x.name} ${x.size} x${x.qty}\n`)
+window.open("https://wa.me/34623979170?text="+encodeURIComponent(txt))
 }
 
-let nombre = document.getElementById("nombreCliente").value;
-
-if(nombre.trim() === ""){
-alert("Por favor escribe tu nombre");
-return;
+function toggleCart(){
+document.getElementById("cartBox").classList.toggle("open");
 }
-
-let mensaje = "🛒 NUEVO PEDIDO\n\n";
-mensaje += "Nombre: " + nombre + "\n\n";
-
-cart.forEach(item=>{
-mensaje += `- ${item.name} (${item.size}) x${item.qty} = ${item.price*item.qty}€\n`;
-});
-
-let total = cart.reduce((a,b)=>a + b.price*b.qty,0);
-
-mensaje += "\nTOTAL: " + total + "€";
-
-let numero = "34623979170";
-
-let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensaje);
-
-window.open(url, "_blank");
-}
-  function changeQty(id, change){
-  let el = document.getElementById(id);
-  let value = parseInt(el.innerText);
-
-  value += change;
-  if(value < 1) value = 1;
-
-  el.innerText = value;
-}
-
 </script>
+</body>
+</html>
+
 
 </body>
 </html>
