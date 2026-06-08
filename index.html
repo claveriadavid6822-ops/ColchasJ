@@ -201,7 +201,7 @@ let total=0;
 cart.innerHTML="";
 document.getElementById("cart").innerHTML=cart.map(x=>{
 total+=x.price*x.qty;
-return `${x.name} (${x.size}) x${x.qty}<br>`
+return `${x.name} ${x.size} x${x.qty}<br>`
 }).join("<hr>");
 document.getElementById("total").innerText="Total:"+total+"€"
 }
