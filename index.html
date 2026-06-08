@@ -113,6 +113,13 @@ margin-top:10px;
 
 <div class="cart">
 <h3>🛒 Carrito</h3>
+  
+  <div style="padding:10px;">
+  <h3>Datos del cliente</h3>
+  <input type="text" id="nombreCliente" placeholder="Tu nombre" 
+  style="width:100%;padding:8px;margin-top:5px;border-radius:8px;border:none;">
+</div>
+  
 <div id="cart"></div>
 <div class="total" id="total">Total: 0€</div>
 
@@ -216,7 +223,15 @@ alert("Carrito vacío");
 return;
 }
 
-let mensaje = "Hola, quiero reservar:\n\n";
+let nombre = document.getElementById("nombreCliente").value;
+
+if(nombre.trim() === ""){
+alert("Por favor escribe tu nombre");
+return;
+}
+
+let mensaje = "🛒 NUEVO PEDIDO\n\n";
+mensaje += "Nombre: " + nombre + "\n\n";
 
 cart.forEach(item=>{
 mensaje += `- ${item.name} x${item.qty} = ${item.price*item.qty}€\n`;
@@ -232,6 +247,7 @@ let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensaje);
 
 window.open(url, "_blank");
 }
+🔥 QUÉ HAS
 
 </script>
 
