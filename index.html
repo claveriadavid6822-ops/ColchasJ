@@ -44,36 +44,7 @@ select,input{width:100%;padding:10px;border-radius:10px;margin:10px 0}
 .qty button{width:40px}
 .total{font-weight:bold;margin-top:15px;color:#d8a84b}
 
-@media(max-width:768px){
-.cart{
-position:fixed;
-bottom:0;
-top:auto;
-left:0;
-right:0;
-width:100%;
-margin:0;
-border-radius:20px 20px 0 0;
-max-height:60px;
-overflow:hidden;
-transition:.4s;
-}
-.cart.open{
-max-height:75vh;
-overflow:auto;
-}
-.cartToggle{
-display:block;
-font-weight:bold;
-text-align:center;
-padding:10px;
-cursor:pointer;
-}
-.hero{
-height:55vh;
-background-position:center center;
-}
-}
+
 
 @media(max-width:768px){
 
@@ -214,12 +185,13 @@ window.open("https://wa.me/34623979170?text="+encodeURIComponent(txt))
 
 function toggleCart(){
 const cart=document.getElementById("cartBox");
-cart.classList.toggle("open");
-
 const btn=document.querySelector(".cartToggle");
-btn.innerText = cart.classList.contains("open")
-? "⬇️ Cerrar carrito"
-: "🛒 Abrir carrito";
+
+const isOpen = cart.classList.toggle("open");
+
+btn.innerText = isOpen
+? "Cerrar carrito"
+: "🛒 Carrito";
 }
 
   document.addEventListener("click", function(e){
