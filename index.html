@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Colchas Premium</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
+body{background:#050505;color:white;}
+
+.hero{
+padding:80px 20px;
+text-align:center;
+background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.9)),
+url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80');
+background-size:cover;
+background-position:center;
+}
+
+h1{font-size:3rem;}
+.gold{color:#d4af37;}
+
+.section{padding:60px 8%;}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+}
+
+.card{
+background:#111;
+border:1px solid #222;
+border-radius:20px;
+overflow:hidden;
+transition:.3s;
+padding-bottom:20px;
+}
+
+.card:hover{transform:translateY(-5px);border-color:#d4af37;}
+
+.card img{width:100%;height:220px;object-fit:cover;}
+
+.card h3{margin:10px 0;}
+
+.price{color:#d4af37;font-size:20px;font-weight:bold;}
+
+.controls{
+display:flex;
+gap:10px;
+justify-content:center;
+margin:10px 0;
+}
+
+input[type=number]{
+width:60px;
+padding:5px;
+border-radius:8px;
+border:none;
+text-align:center;
+}
+
+button{
+background:linear-gradient(135deg,#d4af37,#f5d77a);
+border:none;
+padding:10px 15px;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.cart{
+position:fixed;
+right:20px;
+top:20px;
+width:320px;
+background:#111;
+border:1px solid #333;
+padding:15px;
+border-radius:15px;
+max-height:90vh;
+overflow:auto;
+}
+
+.cart h3{color:#d4af37;}
+
+.cart-item{
+font-size:14px;
+margin:10px 0;
+border-bottom:1px solid #222;
+padding-bottom:5px;
+}
+
+.total{
+margin-top:10px;
+font-weight:bold;
+color:#d4af37;
+}
+
+.reserve-btn{
+width:100%;
+margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="cart">
+<h3>🛒 Carrito</h3>
+<div id="cart"></div>
+<div class="total" id="total">Total: 0€</div>
+
+<button class="reserve-btn" onclick="enviarWhatsApp()">
+Reservar todo
+</button>
+</div>
+
+<section class="hero">
+<h1>Colchas <span class="gold">Premium</span></h1>
+<p>Compra y reserva directamente por WhatsApp</p>
+</section>
+
+<section class="section">
+
+<div class="products">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
+<h3>Luxury Black</h3>
+<div class="price">89€</div>
+<div class="controls">
+<input type="number" id="q1" value="1" min="1">
+<button onclick="add('Luxury Black',89,'q1')">Añadir</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
+<h3>Royal Gold</h3>
+<div class="price">119€</div>
+<div class="controls">
+<input type="number" id="q2" value="1" min="1">
+<button onclick="add('Royal Gold',119,'q2')">Añadir</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
+<h3>Prestige White</h3>
+<div class="price">99€</div>
+<div class="controls">
+<input type="number" id="q3" value="1" min="1">
+<button onclick="add('Prestige White',99,'q3')">Añadir</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
+<h3>Silver Dream</h3>
+<div class="price">79€</div>
+<div class="controls">
+<input type="number" id="q4" value="1" min="1">
+<button onclick="add('Silver Dream',79,'q4')">Añadir</button>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+let cart = [];
+
+function add(name, price, qtyId){
+
+let qty = parseInt(document.getElementById(qtyId).value);
+
+let existing = cart.find(p => p.name === name);
+
+if(existing){
+existing.qty += qty;
+} else {
+cart.push({name, price, qty});
+}
+
+render();
+}
+
+function render(){
+
+let html = "";
+let total = 0;
+
+cart.forEach(item=>{
+html += `<div class="cart-item">
+${item.name} x${item.qty} - ${item.price*item.qty}€
+</div>`;
+total += item.price * item.qty;
+});
+
+document.getElementById("cart").innerHTML = html;
+document.getElementById("total").innerHTML = "Total: " + total + "€";
+}
+
+function enviarWhatsApp(){
+
+if(cart.length === 0){
+alert("Carrito vacío");
+return;
+}
+
+let mensaje = "Hola, quiero reservar:\n\n";
+
+cart.forEach(item=>{
+mensaje += `- ${item.name} x${item.qty} = ${item.price*item.qty}€\n`;
+});
+
+let total = cart.reduce((a,b)=>a + b.price*b.qty,0);
+
+mensaje += "\nTOTAL: " + total + "€";
+
+let numero = "34612345678";
+
+let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensaje);
+
+window.open(url, "_blank");
+}
+
+</script>
+
+</body>
+</html>
