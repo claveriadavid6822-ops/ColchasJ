@@ -200,9 +200,9 @@ Reservar todo
   
 <div class="controls">
 <div class="qty-control">
-  <button onclick="changeQty('q1', -1)">-</button>
-  <span id="q1">1</span>
-  <button onclick="changeQty('q1', 1)">+</button>
+  <button onclick="changeQty('q2', -1)">-</button>
+  <span id="q2">1</span>
+  <button onclick="changeQty('q2', 1)">+</button>
 </div>
 <button onclick="add('Colcha M2',10,'q2','size2')">Añadir</button>
 </div>
@@ -220,9 +220,9 @@ Reservar todo
   
 <div class="controls">
 <div class="qty-control">
-  <button onclick="changeQty('q1', -1)">-</button>
-  <span id="q1">1</span>
-  <button onclick="changeQty('q1', 1)">+</button>
+  <button onclick="changeQty('q3', -1)">-</button>
+  <span id="q3">1</span>
+  <button onclick="changeQty('q3', 1)">+</button>
 </div>
 <button onclick="add('Colcha M3',10,'q3','size3')">Añadir</button>
 </div>
@@ -240,9 +240,9 @@ Reservar todo
   
 <div class="controls">
 <div class="qty-control">
-  <button onclick="changeQty('q1', -1)">-</button>
-  <span id="q1">1</span>
-  <button onclick="changeQty('q1', 1)">+</button>
+  <button onclick="changeQty('q4', -1)">-</button>
+  <span id="q4">1</span>
+  <button onclick="changeQty('q4', 1)">+</button>
 </div>
 <button onclick="add('Colcha M4',10,'q4','size4')">Añadir</button>
 </div>
@@ -258,7 +258,7 @@ let cart = [];
 
 function add(name, price, qtyId, sizeId){
 
-let qty = parseInt(document.getElementById(qtyId).value);
+let qty = parseInt(document.getElementById(qtyId).innerText);
 let size = document.getElementById(sizeId).value;
 
 let existing = cart.find(p => p.name === name && p.size === size);
