@@ -141,6 +141,12 @@ Reservar todo
 <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
 <h3>Luxury Black</h3>
 <div class="price">10€</div>
+  
+  <select id="size1" style="width:100%;padding:8px;margin:10px 0;border-radius:8px;">
+  <option value="1.50 (250x260)">1.50 (250x260)</option>
+  <option value="1.05 (200x260)">1.05 (200x260)</option>
+</select>
+  
 <div class="controls">
 <input type="number" id="q1" value="1" min="1">
 <button onclick="add('Luxury Black',10,'q1')">Añadir</button>
@@ -151,6 +157,12 @@ Reservar todo
 <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
 <h3>Royal Gold</h3>
 <div class="price">10€</div>
+  
+  <select id="size2" style="width:100%;padding:8px;margin:10px 0;border-radius:8px;">
+  <option value="1.50 (250x260)">1.50 (250x260)</option>
+  <option value="1.05 (200x260)">1.05 (200x260)</option>
+</select>
+  
 <div class="controls">
 <input type="number" id="q2" value="1" min="1">
 <button onclick="add('Royal Gold',10,'q2')">Añadir</button>
@@ -161,6 +173,12 @@ Reservar todo
 <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
 <h3>Prestige White</h3>
 <div class="price">10€</div>
+  
+  <select id="size3" style="width:100%;padding:8px;margin:10px 0;border-radius:8px;">
+  <option value="1.50 (250x260)">1.50 (250x260)</option>
+  <option value="1.05 (200x260)">1.05 (200x260)</option>
+</select>
+  
 <div class="controls">
 <input type="number" id="q3" value="1" min="1">
 <button onclick="add('Prestige White',10,'q3')">Añadir</button>
@@ -171,6 +189,12 @@ Reservar todo
 <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
 <h3>Silver Dream</h3>
 <div class="price">10€</div>
+  
+  <select id="size4" style="width:100%;padding:8px;margin:10px 0;border-radius:8px;">
+  <option value="1.50 (250x260)">1.50 (250x260)</option>
+  <option value="1.05 (200x260)">1.05 (200x260)</option>
+</select>
+  
 <div class="controls">
 <input type="number" id="q4" value="1" min="1">
 <button onclick="add('Silver Dream',10,'q4')">Añadir</button>
@@ -185,16 +209,17 @@ Reservar todo
 
 let cart = [];
 
-function add(name, price, qtyId){
+function add(name, price, qtyId, sizeId){
 
 let qty = parseInt(document.getElementById(qtyId).value);
+let size = document.getElementById(sizeId).value;
 
-let existing = cart.find(p => p.name === name);
+let existing = cart.find(p => p.name === name && p.size === size);
 
 if(existing){
 existing.qty += qty;
 } else {
-cart.push({name, price, qty});
+cart.push({name, price, qty, size});
 }
 
 render();
@@ -207,7 +232,7 @@ let total = 0;
 
 cart.forEach(item=>{
 html += `<div class="cart-item">
-${item.name} x${item.qty} - ${item.price*item.qty}€
+${item.name} (${item.size}) x${item.qty} - ${item.price*item.qty}€
 </div>`;
 total += item.price * item.qty;
 });
