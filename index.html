@@ -133,7 +133,6 @@ font-size:18px;
 padding-top:10px;
 }
 
-/* opcional: mejoras visuales generales móvil */
 .hero h1{
 font-size:2.5rem;
 }
@@ -214,8 +213,27 @@ window.open("https://wa.me/34623979170?text="+encodeURIComponent(txt))
 }
 
 function toggleCart(){
-document.getElementById("cartBox").classList.toggle("open");
+const cart=document.getElementById("cartBox");
+cart.classList.toggle("open");
+
+const btn=document.querySelector(".cartToggle");
+btn.innerText = cart.classList.contains("open")
+? "⬇️ Cerrar carrito"
+: "🛒 Abrir carrito";
 }
+
+  document.addEventListener("click", function(e){
+const cart=document.getElementById("cartBox");
+
+if(cart.classList.contains("open")){
+if(!cart.contains(e.target) && !e.target.classList.contains("cartToggle")){
+cart.classList.remove("open");
+
+const btn=document.querySelector(".cartToggle");
+btn.innerText="🛒 Abrir carrito";
+}
+}
+});
 </script>
 </body>
 </html>
